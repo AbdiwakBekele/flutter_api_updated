@@ -1,30 +1,33 @@
 <?php 
 
-    // Connection
-    $server = "localhost";
-    $username = "root";
-    $password = "";
-    $db = "flutter_database";
+require('db.php');
 
-    $conn = mysqli_connect($server, $username, $password, $db);
-    if($conn){
-        echo "Successfully Connected";
-    }else{
-        echo "Error Connecting";
+if($conn){
+
+    if($_SERVER['REQUEST_METHOD'] == 'POST' ){
+        $product_name = $_POST['product_name'];
+        $product_description = $_POST['product_description'];
+
+
+        $sql = "INSERT INTO products (product_name, product_description)
+                VALUES ('$product_name', '$product_description') ";
+                
+        $result = $conn->query($sql);
+
+        if($result){
+            $response["success"] = true;
+            $response["message"] = "Product Registered";
+        }else{
+            $response["success"] = false;
+            $response["message"] = "Product failed";
+            
+        }
     }
 
-    // Command
-
-    $sql = "INSERT INTO products(product_name, product_type, product_quantity, product_price)
-                VALUES ('Sport Shoes', 'Nike', 10, 2500)";
-
-    $result = mysqli_query($conn, $sql);
-
-    if($result){
-        echo " Data Submitted Successfully";
-    }else{
-        echo " Error Submitting Data";
-    }
+}else { 
+    $response["success"] = false;
+    $response["message"] = "Connections failed";
+}
 
 
 ?>

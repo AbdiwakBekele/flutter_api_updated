@@ -3,11 +3,8 @@
 header("Access-Control-Allow-Origin: *");
 header('Content-Type: application/json; charset=UTF-8');
 
-$server = "localhost";
-$username = "root";
-$password = "";
-$db = "flutter_user";
-$conn = new mysqli($server, $username, $password, $db);
+
+require('db.php');
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);

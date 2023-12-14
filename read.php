@@ -3,12 +3,7 @@ header("Access-Control-Allow-Origin: *");
 header('Content-Type: application/json; charset=UTF-8');
 
     // Connection
-    $server = "localhost";
-    $username = "root";
-    $password = "";
-    $db = "flutter_database";
-
-    $conn = new mysqli($server, $username, $password, $db);
+    require('db');
 
     // Command
     $sql = "SELECT * FROM products";

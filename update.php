@@ -1,9 +1,16 @@
 <?php
     // Connection
+    // $server = "omishtujoy.com";
+    // $username = "omishtujoyco_flutterapi";
+    // $password = "omishtujoyco_flutterapi";
+    // $db = "omishtujoyco_flutterapi";
+
     $server = "localhost";
     $username = "root";
     $password = "";
-    $db = "flutter_database";
+    $db = "flutter_user";
+
+
 
     $conn = mysqli_connect($server, $username, $password, $db);
     if($conn){

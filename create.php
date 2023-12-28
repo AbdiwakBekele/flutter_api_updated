@@ -9,7 +9,7 @@ if($conn){
         $product_description = $_POST['product_description'];
 
 
-        $sql = "INSERT INTO products (product_name, product_description)
+        $sql = "INSERT INTO products (product_name, product_description, product_image)
                 VALUES ('$product_name', '$product_description') ";
                 
         $result = $conn->query($sql);

@@ -11,7 +11,7 @@ if ($conn->connect_error) {
 
 // Retrieve data from Flutter app
 $target = "images/";
-$targetFile = $target . basename($_FILES['image']['name']);
+$targetFile = $target .time(). basename($_FILES['image']['name']);
 
 if(move_uploaded_file($_FILES['image']['tmp_name'], $targetFile)){
     

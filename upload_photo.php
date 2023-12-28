@@ -2,22 +2,11 @@
 header("Access-Control-Allow-Origin: *");
 header('Content-Type: application/json');
 
-require('db.php');
+$targetDirectory = "images/";
+$targetFile = $targetDirectory . basename($_FILES['image']['name']);
 
-// Check the connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+if (move_uploaded_file($_FILES['image']['tmp_name'], $targetFile)) {
+    echo json_encode(array('success' => 'File uploaded successfully.'));
+} else {
+    echo json_encode(array('error' => 'Error uploading the file.'));
 }
-
-// Retrieve data from Flutter app
-$target = "images/";
-$targetFile = $target . basename($_FILES['image']['name']);
-
-if(move_uploaded_file($_FILES['image']['tmp_name'], $targetFile)){
-    
-}
-
-
-// Close the connection
-// $conn->close();
-?>

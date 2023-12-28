@@ -8,27 +8,24 @@ require('db.php');
 if ($conn) {
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        
         $product_name = $_POST['product_name'];
         $product_description = $_POST['product_description'];
         $product_price = $_POST['product_price'];
 
-        $sql = "INSERT INTO products (product_name, product_description, product_price)
-                VALUES ('$product_name', '$product_description', '$product_price') ";
+        $targetDirectory = "images/";
+        $targetFile = $targetDirectory . time() . basename($_FILES['image']['name']) ;
 
-        $result = $conn->query($sql);
+        if (move_uploaded_file($_FILES['image']['tmp_name'], $targetFile)) {
+            
+            $sql = "INSERT INTO products (product_name, product_description, product_price, product_image)
+                VALUES ('$product_name', '$product_description', '$product_price', '$targetFile') ";
 
-        if ($result) {
-            $response["success"] = true;
-            $response["message"] = "Product Registered";
+            $result = $conn->query($sql);
+    
+            echo json_encode(array('success' => 'File uploaded successfully.'));
         } else {
-            $response["success"] = false;
-            $response["message"] = "Product failed";
+            echo json_encode(array('error' => 'Error uploading the file.'));
         }
     }
-} else {
-    $response["success"] = false;
-    $response["message"] = "Connections failed";
 }
-
-echo json_encode($response);
-$conn->close();

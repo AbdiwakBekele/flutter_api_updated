@@ -23,7 +23,7 @@ if ($conn) {
 
             $result = $conn->query($sql);
     
-            echo json_encode(array('success' => 'File uploaded successfully.'));
+            echo json_encode(array('success' => true));
         } else {
             echo json_encode(array('error' => 'Error uploading the file.'));
         }
